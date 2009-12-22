@@ -40,9 +40,9 @@ courtesy of their respective authors but the bugs are all mine.
 
 =head1 INTERFACE
 
-When you "use" this package it installs a single additional method into
-CGI::Application::Dispatch which is immediately available in your
-custom dispatcher classes through inheritance.
+When you "use" this package it installs a single additional method
+C<as_psgi> into CGI::Application::Dispatch which is immediately
+available to your custom dispatcher class through inheritance.
 
 =head2 as_psgi(%args)
 
