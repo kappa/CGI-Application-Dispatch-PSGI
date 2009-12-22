@@ -1,5 +1,10 @@
 package CGI::Application::Dispatch::PSGI;
-use parent 'CGI::Application::Dispatch';
+use strict;
+use 5.008;
+
+our $VERSION = '0.1';
+
+use base qw(CGI::Application::Dispatch);
 use CGI::PSGI;
 
 sub as_psgi {
