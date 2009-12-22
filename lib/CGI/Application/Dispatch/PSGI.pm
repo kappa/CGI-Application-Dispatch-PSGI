@@ -76,6 +76,7 @@ sub as_psgi {
             local *STDERR = $env->{'psgi.errors'};
 
             $args{args_to_new}->{QUERY} = CGI::PSGI->new(shift);
+            local $ENV{PATH_INFO} = $env->{PATH_INFO};
             $self->dispatch(%args);
         };
 
@@ -113,6 +114,10 @@ Alex Kapranoff, C<< <kappa at cpan.org> >>
 
 CGI::Application::Dispatch::PSGI was NOT tested under mod_perl.
 Patches (if need arises) are welcome.
+
+This module was made to use Plack's middlewares during debugging and
+was never run in production. CGI::Application::Dispatch should really
+rely less on %ENV.
 
 Please report any bugs or feature requests to C<bug-cgi-application-dispatch-psgi at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Dispatch-PSGI>.  I will be notified, and then you'll
