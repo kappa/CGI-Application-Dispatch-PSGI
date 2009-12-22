@@ -11,7 +11,7 @@ inc/Module/Install/WriteAll.pm
 lib/CGI/Application/Dispatch/PSGI.pm
 Makefile.PL
 MANIFEST
-META.yml
+MANIFEST.SKIP
 README
 t/00-load.t
 t/boilerplate.t
