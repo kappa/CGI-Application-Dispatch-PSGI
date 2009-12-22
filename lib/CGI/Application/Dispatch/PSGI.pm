@@ -47,6 +47,8 @@ sub as_psgi {
     my ($self, %args) = @_;
 
     return sub {
+        my $env = shift;
+
         my $output = do {
             no warnings 'redefine';
             local $ENV{CGI_APP_RETURN_ONLY} = 1;
@@ -87,7 +89,6 @@ Alex Kapranoff, C<< <kappa at cpan.org> >>
 Please report any bugs or feature requests to C<bug-cgi-application-dispatch-psgi at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Dispatch-PSGI>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
 
 =head1 SUPPORT
 
