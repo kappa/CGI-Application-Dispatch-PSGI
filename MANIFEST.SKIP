@@ -1,2 +1,7 @@
 .git/
 CGI-Application-Dispatch-PSGI-*/
+blib/
+Makefile$
+MANIFEST.bak
+META.yml
+pm_to_blib
