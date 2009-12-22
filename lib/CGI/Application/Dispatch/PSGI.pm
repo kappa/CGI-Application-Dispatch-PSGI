@@ -10,7 +10,7 @@ CGI::Application::Dispatch::PSGI - PSGI adapter for CGI::Application::Dispatch
 
 our $VERSION = '0.1';
 
-use base qw(CGI::Application::Dispatch);
+use CGI::Application::Dispatch ();
 use CGI::PSGI;
 
 =head1 SYNOPSIS
@@ -23,23 +23,43 @@ It is a little too high-level to be directly converted to PSGI with
 CGI::Application::PSGI so the need for a special adapter rose. Here it
 is.
 
-    ### in your Dispatch...
+    ### in your dispatch.psgi:
+    use Your::Application::Dispatch;
     use CGI::Application::Dispatch::PSGI;
-    XXXX
-    ...
+
+    Your::Application::Dispatch->as_psgi;
+
+Most of CGI::Application::Dispatch scripts may be converted by
+simply changing C<dispatch()> method call to C<as_psgi()> call.
+
+The code is a mere mashup of L<CGI::Application::PSGI> and
+L<CGI::Application::Emulate::PSGI>, so all the good parts here are
+courtesy of their respective authors but the bugs are all mine.
 
 =cut
 
-=head1 GENERAL FUNCTIONS
+=head1 INTERFACE
 
-=head2 as_psgi(\%args)
+When you "use" this package it installs a single additional method into
+CGI::Application::Dispatch which is immediately available in your
+custom dispatcher classes through inheritance.
 
-This is a constructor for PSGI application sub. It takes an optional
-hashref with additional arguments for... XXX
+=head2 as_psgi(%args)
+
+This is a constructor for PSGI application sub. It must be called as a
+method and takes an optional hash with arguments for dispatcher. For
+additional information about the arguments, see
+L<CGI::Application::Dispatcher/dispatch(%args)>.
 
 Example:
 
-    XXXX
+    my $app = MyApp::CAP::Dispatch->as_psgi(
+        args_to_new => {
+            PARAMS => {
+                cfg_file => "$cfgdir/myapp.cfg",
+            },
+        },
+    );
 
 =cut
 
@@ -80,11 +100,19 @@ sub as_psgi {
     };
 }
 
+sub import {
+    no strict 'refs';
+    *{CGI::Application::Dispatch::as_psgi} = \&as_psgi;
+}
+
 =head1 AUTHOR
 
 Alex Kapranoff, C<< <kappa at cpan.org> >>
 
 =head1 BUGS
+
+CGI::Application::Dispatch::PSGI was NOT tested under mod_perl.
+Patches (if need arises) are welcome.
 
 Please report any bugs or feature requests to C<bug-cgi-application-dispatch-psgi at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CGI-Application-Dispatch-PSGI>.  I will be notified, and then you'll
@@ -117,6 +145,11 @@ L<http://cpanratings.perl.org/d/CGI-Application-Dispatch-PSGI>
 L<http://search.cpan.org/dist/CGI-Application-Dispatch-PSGI>
 
 =back
+
+=head1 SEE ALSO
+
+L<http://plackperl.org>, L<CGI::Application::PSGI>,
+L<CGI::Application::Emulate::PSGI>, L<CGI::Application::Dispatch::Server>.
 
 =head1 COPYRIGHT & LICENSE
 
