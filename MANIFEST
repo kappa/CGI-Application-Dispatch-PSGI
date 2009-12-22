@@ -8,7 +8,6 @@ inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
-lib/CGI/Application/Dispatch/.PSGI.pm.swp
 lib/CGI/Application/Dispatch/PSGI.pm
 Makefile.PL
 MANIFEST
