@@ -8,4 +8,6 @@ requires 'CGI::Application::Dispatch';
 
 test_requires 'Test::More';
 
+license 'gpl';
+
 WriteAll;
