@@ -49,7 +49,7 @@ available to your custom dispatcher class through inheritance.
 This is a constructor for PSGI application sub. It must be called as a
 method and takes an optional hash with arguments for dispatcher. For
 additional information about the arguments, see
-L<CGI::Application::Dispatcher/dispatch(%args)>.
+L<CGI::Application::Dispatch/dispatch(%args)>.
 
 Example:
 
