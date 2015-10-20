@@ -1,5 +1,10 @@
 PSGI adapter for CGI::Application::Dispatch
 
+This is a very old experiment.
+
+You should not use it in production. Please, use this:
+https://metacpan.org/pod/CGI::Application::Dispatch::PSGI
+
 CGI::Application::Dispatch is a (not so) simple dispatcher for families
 of CGI::Application-based applications served under common URL base.
 
